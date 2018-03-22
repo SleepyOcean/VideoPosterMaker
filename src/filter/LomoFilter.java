@@ -1,0 +1,90 @@
+package filter;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import config.Configuration;
+
+/**
+ * @name: ImageFilter.java
+ * @author: sleepyocean
+ * @date: created in 2018年2月11日 下午4:11:17
+ * @version: 1.0
+ * @description: Lomo滤镜
+ */
+
+public class LomoFilter implements IFilter {
+	public void lomo(String fromPath, String toPath) throws IOException {
+
+		BufferedImage fromImage = ImageIO.read(new File(fromPath));
+
+		int width = fromImage.getWidth();
+		int height = fromImage.getHeight();
+		BufferedImage toImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+		int a, r, g, b, grayValue = 0;
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				int rgb = fromImage.getRGB(i, j);
+				// 过滤
+				a = rgb & 0xff000000;
+				r = (rgb & 0xff0000) >> 16;
+				g = (rgb & 0xff00) >> 8;
+				b = (rgb & 0xff);
+
+				b = ModeSmoothLight(b, b);
+				g = ModeSmoothLight(g, g);
+				r = ModeSmoothLight(r, r);
+				b = ModeExclude(b, 80);
+				g = ModeExclude(g, 15);
+				r = ModeExclude(r, 5);
+
+				grayValue = a | (r << 16) | (g << 8) | b;
+				toImage.setRGB(i, j, grayValue);
+			}
+		}
+		ImageIO.write(toImage, "jpg", new File(toPath));
+	}
+
+	private int ModeSmoothLight(int basePixel, int mixPixel) {
+		int res = 0;
+		res = mixPixel > 128
+				? ((int) ((float) basePixel + ((float) mixPixel + (float) mixPixel - 255.0f)
+						* ((Math.sqrt((float) basePixel / 255.0f)) * 255.0f - (float) basePixel) / 255.0f))
+				: ((int) ((float) basePixel + ((float) mixPixel + (float) mixPixel - 255.0f)
+						* ((float) basePixel - (float) basePixel * (float) basePixel / 255.0f) / 255.0f));
+		return Math.min(255, Math.max(0, res));
+	}
+
+	private int ModeExclude(int basePixel, int mixPixel) {
+		int res = 0;
+		res = (mixPixel + basePixel) - mixPixel * basePixel / 128;
+		return Math.min(255, Math.max(0, res));
+	}
+
+	@Override
+	public String apply() {
+		try {
+			lomo(getFromPath(), getToPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return getToPath();
+	}
+
+	private String getToPath() {
+		return Configuration.getImgOutputPath()+"lomo.jpg";
+	}
+
+	private String getFromPath() {
+		return Configuration.getKeyFramePath()+Configuration.getKeyFramePrefixName()+"69.jpeg";
+	}
+	
+	public void test() {
+		System.out.println(getToPath());
+	}
+}

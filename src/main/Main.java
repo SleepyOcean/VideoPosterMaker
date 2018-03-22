@@ -1,12 +1,22 @@
 package main;
 
+import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import extension.FastBlurUtil;
-import extension.FilterExec;
+import filter.FastBlurUtil;
+import filter.FilterExec;
+import filter.LomoFilter;
 import tools.VideoKeyFrameGetter;
+import view.MainFrame;
 
 /**
  * @name: Main.java
@@ -18,34 +28,36 @@ import tools.VideoKeyFrameGetter;
 
 public class Main {
 	public static void main(String[] args) {
-		// System.out.println("Starting......");
-		test2();
-	}
-	
-	public static void test1() {
-		JFrame frame = new JFrame("VideoPosterMaker");
-		frame.setSize(1920, 1080);
-		frame.setLocation(0, 0);
+		System.out.println("Application has been started.");
 
-		FunctionsTest test = new FunctionsTest(frame);
-
-		test.displayImg(".\\res\\p1.jpg");
+//		generateKeyFrame();
 		try {
-			test.outputEditedPic(".\\res\\", "p1.jpg");
-			FastBlurUtil.gaussianBlur(".\\res\\p1.jpg",".\\res\\gaussianBlur.jpg");
-			FilterExec.filterExecBlur(".\\res\\girl.jpg",".\\res\\blur1-girl.jpg");
-			FilterExec.filterExecSharpen(".\\res\\girl.jpg",".\\res\\sharpen1-girl.jpg");
+			test1();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void test2() {
+	public static void test1() throws FileNotFoundException, IOException {
+		MainFrame test = new MainFrame();
+		String imgPath = new LomoFilter().apply();
+		File picture = new File(imgPath);
+		BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
+
+		test.setSize(sourceImg.getWidth(), sourceImg.getHeight());
+		test.setLocation(0, 0);
+
+		test.setMainFrameOutlook();
+		test.displayImg(imgPath);
+
+	}
+
+	public static void generateKeyFrame() {
 		try {
-			VideoKeyFrameGetter.generateKeyFrame("D:\\Cache\\dt.mp4");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			VideoKeyFrameGetter.generateKeyFrame("D:\\Cache\\Avengers.mp4");
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}

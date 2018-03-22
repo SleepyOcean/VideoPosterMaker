@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainApp">
+	<children>
+		<BorderPane prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<top>
+				<MenuBar maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" BorderPane.alignment="CENTER">
+					<menus>
+						<Menu mnemonicParsing="false" text="File">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Open Video" />
+								<MenuItem text="Open Picture" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem mnemonicParsing="false" text="Exit" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Edit">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Delete" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Help">
+							<items>
+								<MenuItem mnemonicParsing="false" text="About" />
+							</items>
+						</Menu>
+					</menus>
+				</MenuBar>
+			</top>
+			<right>
+				<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="334.0" BorderPane.alignment="CENTER">
+					<children>
+						<Label layoutX="40.0" layoutY="20.0" text="Filter">
+							<font>
+								<Font name="Segoe UI Semibold" size="18.0" />
+							</font>
+						</Label>
+						<ComboBox layoutX="120.0" layoutY="20.0" prefWidth="150.0" promptText="Lomo" />
+						<Label layoutX="40.0" layoutY="80.0" text="Font Style">
+							<font>
+								<Font name="Segoe UI Semibold" size="18.0" />
+							</font>
+						</Label>
+						<Label layoutX="50.0" layoutY="130.0" text="Size">
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Label>
+						<ComboBox layoutX="120.0" layoutY="130.0" prefWidth="150.0" promptText="16" />
+						<Label layoutX="50.0" layoutY="180.0" text="Style">
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Label>
+						<ComboBox layoutX="120.0" layoutY="180.0" prefWidth="150.0" promptText="Conlas" />
+						<Label layoutX="40.0" layoutY="240.0" text="Poster Title">
+							<font>
+								<Font name="Segoe UI Semibold" size="18.0" />
+							</font>
+						</Label>
+						<TextField fx:id="posterTitleInput" layoutX="50.0" layoutY="280.0" onKeyReleased="#posterTitleInputKeyReleasedEvent" />
+						<Label layoutX="40.0" layoutY="340.0" text="Poster Description">
+							<font>
+								<Font name="Segoe UI Semibold" size="18.0" />
+							</font>
+						</Label>
+						<TextField layoutX="50.0" layoutY="380.0" />
+						<Button layoutX="40.0" layoutY="440.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" text="Generate">
+							<font>
+								<Font size="18.0" />
+							</font>
+						</Button>
+					</children>
+				</Pane>
+			</right>
+			<center>
+				<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" BorderPane.alignment="TOP_LEFT">
+					<children>
+						<ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../../../Wallpaper/21/wallhaven-64108.jpg" />
+							</image>
+						</ImageView>
+					</children>
+				</Pane>
+			</center>
+         <left>
+      				<Pane prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+         </left>
+         <bottom>
+      				<ScrollPane fx:id="keyFrameScrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#keyFrameScrollPaneOnClick" pannable="true" prefHeight="207.0" prefWidth="1700.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER" />
+         </bottom>
+		</BorderPane>
+	</children>
+</AnchorPane>

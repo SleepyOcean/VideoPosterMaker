@@ -1,178 +1,138 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+import java.awt.MenuShortcut;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileView;
+
+import config.Configuration;
+import filter.LomoFilter;
 
 /**
- * @name: MainFrame.java
+ * @name: FunctionsTest.java
  * @author: sleepyocean
- * @date: created in 2018年2月4日 下午9:03:43
+ * @date: created in 2018年2月4日 下午8:39:29
  * @version: 1.0
  * @description: TODO (write your description)
  */
 
-public class MainFrame {
-	JLabel label;
-	JFileChooser chooser;
+public class MainFrame extends JFrame {
 
-	class ImageViewerFrame extends JFrame {
+	public void setMainFrameOutlook() {
+		this.setTitle(Configuration.getAppName());
+		setFrameSize();
+		setMenuBar();
+		setFrameLayout();
+	}
 
-		public ImageViewerFrame() {
-			super("ImageViewer");
-			setSize(WIDTH, HEIGHT);
-			try {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} catch (Exception e) {
-				//
-			}
+	private void setFrameLayout() {
+		this.setLayout(new BorderLayout());
+	}
 
-			JMenuBar menuBar = new JMenuBar();
-			setJMenuBar(menuBar);
-			JMenu menu = new JMenu("File");
-			JMenuItem openItem = new JMenuItem("open");
-			menu.add(openItem);
-			openItem.addActionListener(new FileOpenListener());
-			JMenuItem exitItem = new JMenuItem("exit");
-			menu.add(exitItem);
-			menuBar.add(menu);
-			exitItem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					System.exit(0);
-				}
-			});
+	private void setMenuBar() {
+		MenuBar menuBar = new MenuBar();
 
-			// use a label to display a image
-			label = new JLabel();
-			add(label, BorderLayout.CENTER);
+		Menu menuFile = new Menu("File");
+		Menu menuAbout = new Menu("About");
 
-			chooser = new JFileChooser();
-			FileFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "jpeg", "gif");
-			chooser.setFileFilter(filter);
-			// 预览
-			chooser.setAccessory(new ImagePreviewer(chooser));
-			// accessory 通常用于显示已选中文件的预览图像
+		MenuItem itemVideo = new MenuItem("Open Video Source");
+		itemVideo.setShortcut(new MenuShortcut(KeyEvent.VK_V,false));
+		MenuItem itemImage = new MenuItem("Opne Image");
+		MenuItem itemExport = new MenuItem("Export");
 
-			// chooser.setFileView(new FileIconView(filter,new ImageIcon("palette.gif")));
-			chooser.setFileView(new FileIconView(filter, new ImageIcon()));
-			// 设置用于检索 UI 信息的文件视图，如表示文件的图标或文件的类型描述。
+		menuFile.add(itemVideo);
+		menuFile.add(itemImage);
+		menuFile.add(itemExport);
 
-		}
+		MenuItem itemAbout = new MenuItem("Abot software");
+		MenuItem itemUpdate = new MenuItem("Update");
+		MenuItem itemContact = new MenuItem("Contact me");
 
-		private class FileOpenListener implements ActionListener {
+		menuAbout.add(itemAbout);
+		menuAbout.add(itemUpdate);
+		menuAbout.add(itemContact);
+
+		menuBar.add(menuFile);
+		menuBar.add(menuAbout);
+
+		this.setMenuBar(menuBar);
+	}
+
+	private void setJMenuBar() {
+		JMenuBar menuBar = new JMenuBar();
+
+		JMenu menuFile = new JMenu("文件（F）");
+		menuFile.setMnemonic('f');
+		JMenu menuAbout = new JMenu("关于（A）");
+		menuFile.setMnemonic('a');
+
+		JMenuItem itemVideo = new JMenuItem("打开视频");
+		JMenuItem itemImage = new JMenuItem("打开图片");
+		JMenuItem itemExport = new JMenuItem("导出");
+
+		menuFile.add(itemVideo);
+		menuFile.add(itemImage);
+		menuFile.add(itemExport);
+
+		JMenuItem itemAbout = new JMenuItem("关于软件");
+		JMenuItem itemUpdate = new JMenuItem("检查更新");
+		JMenuItem itemContact = new JMenuItem("联系我");
+
+		menuAbout.add(itemAbout);
+		menuAbout.add(itemUpdate);
+		menuAbout.add(itemContact);
+
+		menuBar.add(menuFile);
+		menuBar.add(menuAbout);
+
+		this.setJMenuBar(menuBar);
+
+	}
+
+	private void setFrameSize() {
+		// TODO 设置窗口大小
+	}
+
+	
+	public void displayImg(String imagePath) {
+		JLabel label = new JLabel() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				chooser.setCurrentDirectory(new File("."));
-				int result = chooser.showOpenDialog(ImageViewerFrame.this);
-				if (result == JFileChooser.APPROVE_OPTION) {
-					String name = chooser.getSelectedFile().getPath();
-					ImageIcon icon = new ImageIcon(name);
-					// 等比缩放条件
-					// int imgWidth=icon.getIconWidth();
-					// int imgHeight=icon.getIconHeight();
-					// int conWidth=getWidth();
-					// int conHeight=getHeight();
-					// int reImgWidth;
-					// int reImgHeight;
-					// if(imgWidth/imgHeight>=conWidth/conHeight){
-					// if(imgWidth>conWidth){
-					// reImgWidth=conWidth;
-					// reImgHeight=imgHeight*reImgWidth/imgWidth;
-					// }else{
-					// reImgWidth=imgWidth;
-					// reImgHeight=imgHeight;
-					// }
-					// }else{
-					// if(imgWidth>conWidth){
-					// reImgHeight=conHeight;
-					// reImgWidth=imgWidth*reImgHeight/imgHeight;
-					// }else{
-					// reImgWidth=imgWidth;
-					// reImgHeight=imgHeight;
-					// }
-					// }
-					// 这个是强制缩放到与组件(Label)大小相同
-					icon = new ImageIcon(
-							icon.getImage().getScaledInstance(getWidth(), getHeight() - 25, Image.SCALE_DEFAULT));
-					// 这个是按等比缩放
-					// icon=new ImageIcon(icon.getImage().getScaledInstance(reImgWidth, reImgHeight,
-					// Image.SCALE_DEFAULT));
-					label.setIcon(icon);
-					label.setHorizontalAlignment(SwingConstants.CENTER);
-				}
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+
+				ImageIcon imageIcon = new ImageIcon(imagePath);
+				g.drawImage(imageIcon.getImage(), 0, 0, getWidth(), getHeight(), imageIcon.getImageObserver());
+
+				Font font = new Font("Impact", Font.PLAIN, 100);
+				Rectangle r = g.getClipBounds();
+				new DescriptionSetter().centerString(g, r, "Marvel", font);
 			}
-		}
+		};
 
-		public static final int WIDTH = 500;
-		public static final int HEIGHT = 500;
-
-		private JLabel label;
-		private JFileChooser chooser;
-	}
-
-	class FileIconView extends FileView {
-		public FileIconView(FileFilter aFilter, Icon anIcon) {
-			filter = aFilter;
-			icon = anIcon;
-		}
-
-		public Icon getIcon(File f) {
-			if (!f.isDirectory() && filter.accept(f)) {
-				return icon;
-			} else
-				return null;
-		}
-
-		private FileFilter filter;
-		private Icon icon;
-	}
-
-	class ImagePreviewer extends JLabel {
-		public ImagePreviewer(JFileChooser chooser) {
-			setPreferredSize(new Dimension(100, 100));
-			setBorder(BorderFactory.createEtchedBorder());
-			chooser.addPropertyChangeListener(new PropertyChangeListener() {
-				public void propertyChange(PropertyChangeEvent event) {
-					if (event.getPropertyName() == JFileChooser.SELECTED_FILE_CHANGED_PROPERTY) {
-						File f = (File) event.getNewValue();
-						if (f == null) {
-							setIcon(null);
-							return;
-						}
-						ImageIcon icon = new ImageIcon(f.getPath());
-						// if(icon.getIconWidth()>getWidth()){
-						icon = new ImageIcon(icon.getImage().getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT));
-						// }
-						setIcon(icon);
-					}
-				}
-			});
-		}
+		this.add(label);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
 
 }

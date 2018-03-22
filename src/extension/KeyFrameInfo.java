@@ -12,5 +12,4 @@ public class KeyFrameInfo {
 	String description;
 	String outputFileName;
 
-	
 }

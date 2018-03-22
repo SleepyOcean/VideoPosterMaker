@@ -1,0 +1,135 @@
+﻿Arial
+Arial Black
+Bahnschrift
+Caladea
+Calibri
+Calibri Light
+Cambria
+Cambria Math
+Candara
+Carlito
+Comic Sans MS
+Consolas
+Constantia
+Corbel
+Courier New
+DejaVu Math TeX Gyre
+DejaVu Sans
+DejaVu Sans Condensed
+DejaVu Sans Light
+DejaVu Sans Mono
+DejaVu Serif
+DejaVu Serif Condensed
+Dialog
+DialogInput
+Ebrima
+EmojiOne Color
+Franklin Gothic Medium
+Gabriola
+Gadugi
+Gentium Basic
+Gentium Book Basic
+Georgia
+HoloLens MDL2 Assets
+Impact
+Javanese Text
+Leelawadee UI
+Leelawadee UI Semilight
+Liberation Mono
+Liberation Sans
+Liberation Sans Narrow
+Liberation Serif
+Linux Biolinum G
+Linux Libertine Display G
+Linux Libertine G
+Lucida Bright
+Lucida Console
+Lucida Sans
+Lucida Sans Typewriter
+Lucida Sans Unicode
+Malgun Gothic
+Malgun Gothic Semilight
+Marlett
+Microsoft Himalaya
+Microsoft JhengHei UI
+Microsoft JhengHei UI Light
+Microsoft New Tai Lue
+Microsoft PhagsPa
+Microsoft Sans Serif
+Microsoft Tai Le
+Microsoft YaHei UI
+Microsoft YaHei UI Light
+Microsoft Yi Baiti
+Mongolian Baiti
+Monospaced
+MS Gothic
+MS PGothic
+MS UI Gothic
+MV Boli
+Myanmar Text
+Nirmala UI
+Nirmala UI Semilight
+Open Sans
+OpenSymbol
+Palatino Linotype
+PT Serif
+SansSerif
+Segoe MDL2 Assets
+Segoe Print
+Segoe Script
+Segoe UI
+Segoe UI Black
+Segoe UI Emoji
+Segoe UI Historic
+Segoe UI Light
+Segoe UI Semibold
+Segoe UI Semilight
+Segoe UI Symbol
+Serif
+SimSun-ExtB
+Sitka Banner
+Sitka Display
+Sitka Heading
+Sitka Small
+Sitka Subheading
+Sitka Text
+Source Code Pro
+Source Code Pro Black
+Source Code Pro ExtraLight
+Source Code Pro Light
+Source Code Pro Medium
+Source Code Pro Semibold
+Source Sans Pro
+Source Sans Pro Black
+Source Sans Pro ExtraLight
+Source Sans Pro Light
+Source Sans Pro Semibold
+Sylfaen
+Symbol
+Tahoma
+Times New Roman
+Trebuchet MS
+Verdana
+Webdings
+Wingdings
+Yu Gothic
+Yu Gothic Light
+Yu Gothic Medium
+Yu Gothic UI
+Yu Gothic UI Light
+Yu Gothic UI Semibold
+Yu Gothic UI Semilight
+仿宋
+宋体
+微軟正黑體
+微軟正黑體 Light
+微软雅黑
+微软雅黑 Light
+新宋体
+新細明體-ExtB
+楷体
+等线
+等线 Light
+細明體-ExtB
+細明體_HKSCS-ExtB
+黑体
