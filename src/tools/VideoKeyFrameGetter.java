@@ -63,7 +63,7 @@ public class VideoKeyFrameGetter {
 	private static String getKeyFramePath() {
 		return Configuration.getKeyFramePath();
 	}
-	
+
 	public static int getVideoWidth() {
 		return videoWidth;
 	}

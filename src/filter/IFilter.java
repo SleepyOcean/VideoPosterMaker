@@ -9,5 +9,6 @@ package filter;
  */
 
 public interface IFilter {
-	String apply();
+	String apply(String fromPath,String toPath);
+	String getFilterName();
 }

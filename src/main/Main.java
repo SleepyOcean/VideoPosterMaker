@@ -29,7 +29,6 @@ import view.MainFrame;
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("Application has been started.");
-
 //		generateKeyFrame();
 		try {
 			test1();
@@ -41,16 +40,16 @@ public class Main {
 	}
 
 	public static void test1() throws FileNotFoundException, IOException {
-		MainFrame test = new MainFrame();
-		String imgPath = new LomoFilter().apply();
-		File picture = new File(imgPath);
-		BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
-
-		test.setSize(sourceImg.getWidth(), sourceImg.getHeight());
-		test.setLocation(0, 0);
-
-		test.setMainFrameOutlook();
-		test.displayImg(imgPath);
+//		MainFrame test = new MainFrame();
+////		String imgPath = new LomoFilter().apply();
+//		File picture = new File(imgPath);
+//		BufferedImage sourceImg = ImageIO.read(new FileInputStream(picture));
+//
+//		test.setSize(sourceImg.getWidth(), sourceImg.getHeight());
+//		test.setLocation(0, 0);
+//
+//		test.setMainFrameOutlook();
+////		test.displayImg(imgPath);
 
 	}
 

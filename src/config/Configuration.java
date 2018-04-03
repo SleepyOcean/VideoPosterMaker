@@ -12,9 +12,9 @@ public class Configuration {
 	//软件名
 	private static String APP_NAME = "VideoPosterMaker";
 	// ffmpeg抽取关键帧的缓存路径
-	private static String IMG_PATH = "E:\\ProgramAccumulate\\EclipseWS\\VideoPosterMaker\\frames\\";
+	private static String KEYFRAMES_PATH = "D:\\Cache\\frames\\";
 	// 滤镜效果输出路径
-	private static String IMG_OUTPUT_PATH = "E:\\ProgramAccumulate\\EclipseWS\\VideoPosterMaker\\outputs\\";
+	private static String IMG_OUTPUT_PATH = "D:\\Cache\\outputs\\";
 	// 关键帧图片名前缀
 	public static String IMG_NAME_PREFIX = "keyFrame-";
 
@@ -28,7 +28,7 @@ public class Configuration {
 	}
 
 	public static String getKeyFramePath() {
-		return IMG_PATH;
+		return KEYFRAMES_PATH;
 	}
 	
 	public static String getAppName() {

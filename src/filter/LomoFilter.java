@@ -17,6 +17,7 @@ import config.Configuration;
  */
 
 public class LomoFilter implements IFilter {
+
 	public void lomo(String fromPath, String toPath) throws IOException {
 
 		BufferedImage fromImage = ImageIO.read(new File(fromPath));
@@ -67,24 +68,17 @@ public class LomoFilter implements IFilter {
 	}
 
 	@Override
-	public String apply() {
+	public String apply(String fromPath, String toPath) {
 		try {
-			lomo(getFromPath(), getToPath());
+			lomo(fromPath, toPath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return getToPath();
+		return toPath;
 	}
 
-	private String getToPath() {
-		return Configuration.getImgOutputPath()+"lomo.jpg";
-	}
-
-	private String getFromPath() {
-		return Configuration.getKeyFramePath()+Configuration.getKeyFramePrefixName()+"69.jpeg";
-	}
-	
-	public void test() {
-		System.out.println(getToPath());
+	@Override
+	public String getFilterName() {
+		return "Lomo";
 	}
 }
