@@ -75,8 +75,10 @@ public class MainApplication extends Application {
 				new FileChooser.ExtensionFilter("MP4", "*.mp4"), new FileChooser.ExtensionFilter("rmvb", "*.rmvb"),
 				new FileChooser.ExtensionFilter("mkv", "*.mkv"), new FileChooser.ExtensionFilter("avi", "*.avi"));
 
-		String videoPath = fileChooser.showOpenDialog(primaryStage).getAbsolutePath();
-
+		File videoFile = fileChooser.showOpenDialog(primaryStage);
+		if (videoFile == null)
+			return;
+		String videoPath = videoFile.getAbsolutePath();
 		// 清空之前的关键帧
 		clearCache();
 		// 生成该视频的关键帧
@@ -112,7 +114,7 @@ public class MainApplication extends Application {
 		primaryStage.setTitle(Configuration.getAppName());
 		primaryStage.setWidth(SizeManager.appSize.getWidth());
 		primaryStage.setHeight(SizeManager.appSize.getHeight());
-		primaryStage.setResizable(false);
+		// primaryStage.setResizable(false);
 	}
 
 	private void initViewFrame() {
@@ -365,18 +367,15 @@ public class MainApplication extends Application {
 		switch (arg2) {
 		case "conlas s":
 			production.getCharacter().setTitleFont(new java.awt.Font("Calibri", java.awt.Font.BOLD, 80));
-			;
 			production.getCharacter().setDescriptionFont(new java.awt.Font("Calibri", java.awt.Font.BOLD, 10));
 			break;
 		case "Palatino Linotype m":
 			production.getCharacter().setTitleFont(new java.awt.Font("Palatino Linotype", java.awt.Font.BOLD, 100));
-			;
 			production.getCharacter()
 					.setDescriptionFont(new java.awt.Font("Palatino Linotype", java.awt.Font.BOLD, 20));
 			break;
 		case "system l":
 			production.getCharacter().setTitleFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 160));
-			;
 			production.getCharacter().setDescriptionFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 40));
 			break;
 		}
@@ -385,15 +384,24 @@ public class MainApplication extends Application {
 	// 改变海报显示的图片
 	protected void updatePosterImg(String path) throws MalformedURLException {
 		Image image = new Image((new File(path)).toURI().toURL().toString());
-		int vh = production.getHeight();
-		int vw = production.getWidth();
+		// int vh = production.getHeight();
+		// int vw = production.getWidth();
 
-		Rectangle clip = new Rectangle(1366, (vh * 1366) / vw);
-		clip.setArcWidth(100);
-		clip.setArcHeight(100);
+		// Rectangle clip = new Rectangle(1366, (vh * 1366) / vw);
+		// clip.setArcWidth(100);
+		// clip.setArcHeight(100);
 		// poster.setClip(clip);
-		poster.setFitWidth(1366);
-		poster.setFitHeight((vh * 1366) / vw);
+		if ((SizeManager.posterSize.getWidth() / SizeManager.posterSize.getHeight()) < (production.getWidth()
+				/ production.getHeight())) {
+			poster.setFitWidth(SizeManager.posterSize.getWidth());
+			poster.setFitHeight((production.getHeight() * SizeManager.posterSize.getWidth()) / production.getWidth());
+		} else {
+			poster.setFitHeight(SizeManager.posterSize.getHeight());
+			poster.setFitWidth((production.getWidth() * SizeManager.posterSize.getHeight()) / production.getHeight());
+		}
+
+		// poster.setFitWidth(1366);
+		// poster.setFitHeight((vh * 1366) / vw);
 		poster.setImage(image);
 	}
 }

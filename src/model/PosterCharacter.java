@@ -39,9 +39,7 @@ public class PosterCharacter {
 
 	public PosterCharacter(String title, String description, int pos, Font titleFont, Color titleColor,
 			Font descriptionFont, Color descriptionColor) {
-		this.description = description;
-		this.title = title;
-		this.pos = pos;
+		this(title, description, pos);
 		this.titleFont = titleFont;
 		this.titleColor = titleColor;
 		this.descriptionFont = descriptionFont;
@@ -49,13 +47,8 @@ public class PosterCharacter {
 	}
 
 	public PosterCharacter(String title, String description, int pos) {
-		this.description = description;
-		this.title = title;
+		this(title, description);
 		this.pos = pos;
-		this.titleFont = new Font("Serif", Font.BOLD, 100);
-		this.titleColor = Color.BLACK;
-		this.descriptionFont = new Font("Serif", Font.BOLD, 20);
-		this.descriptionColor = Color.WHITE;
 	}
 
 	public PosterCharacter(String title, String description) {
@@ -141,24 +134,29 @@ public class PosterCharacter {
 			int[] posCoord = new int[4];
 			switch (pos) {
 			case Param.CharacterPos.CENTER:
-				posCoord = getCenterPos(w, h, titleWH[0], titleWH[1], titleWH[2], descriptionWH[0], descriptionWH[1],
-						descriptionWH[2]);
+				posCoord = getCenterPos(w, h,
+						titleWH[0], titleWH[1], titleWH[2], 
+						descriptionWH[0], descriptionWH[1],descriptionWH[2]);
 				break;
 			case Param.CharacterPos.LEFT_TOP:
-				posCoord = getLTPos(w, h, titleWH[0], titleWH[1], titleWH[2], descriptionWH[0], descriptionWH[1],
-						descriptionWH[2]);
+				posCoord = getLTPos(w, h, 
+						titleWH[0], titleWH[1], titleWH[2], 
+						descriptionWH[0], descriptionWH[1],descriptionWH[2]);
 				break;
 			case Param.CharacterPos.LEFT_BOTTOM:
-				posCoord = getLBPos(w, h, titleWH[0], titleWH[1], titleWH[2], descriptionWH[0], descriptionWH[1],
-						descriptionWH[2]);
+				posCoord = getLBPos(w, h, 
+						titleWH[0], titleWH[1], titleWH[2],
+						descriptionWH[0], descriptionWH[1],descriptionWH[2]);
 				break;
 			case Param.CharacterPos.RIGHT_TOP:
-				posCoord = getRTPos(w, h, titleWH[0], titleWH[1], titleWH[2], descriptionWH[0], descriptionWH[1],
-						descriptionWH[2]);
+				posCoord = getRTPos(w, h,
+						titleWH[0], titleWH[1], titleWH[2],
+						descriptionWH[0], descriptionWH[1],descriptionWH[2]);
 				break;
 			case Param.CharacterPos.RIGHT_BOTTOM:
-				posCoord = getRBPos(w, h, titleWH[0], titleWH[1], titleWH[2], descriptionWH[0], descriptionWH[1],
-						descriptionWH[2]);
+				posCoord = getRBPos(w, h, 
+						titleWH[0], titleWH[1], titleWH[2],
+						descriptionWH[0], descriptionWH[1],descriptionWH[2]);
 				break;
 			}
 
@@ -189,15 +187,23 @@ public class PosterCharacter {
 		return outputPath;
 	}
 
+	/**
+	 * 
+	 * @Title: getFontWidthAndHeight @Description:
+	 * TODO(这里用一句话描述这个方法的作用) @param @param content @param @param g @param @param
+	 * font @param @return @return int[]
+	 * [0]代表文字的宽度，[1]代表文字的上沿高度,[2]代表文字的下沿高度 @throws
+	 */
 	private int[] getFontWidthAndHeight(String content, Graphics2D g, Font font) {
 		g.setFont(font);
 		FontMetrics fm = g.getFontMetrics();
 		return new int[] { fm.stringWidth(content), fm.getAscent(), fm.getDescent() };
 	}
 
-//	public static void main(String[] args) {
-//		new PosterCharacter("沉睡的海洋", "制作于2018-04-02").apply("E:\\Wallpaper\\20\\wallhaven-247289.jpg");
-//	}
+	// public static void main(String[] args) {
+	// new PosterCharacter("沉睡的海洋",
+	// "制作于2018-04-02").apply("E:\\Wallpaper\\20\\wallhaven-247289.jpg");
+	// }
 
 	/**
 	 * 
@@ -216,7 +222,7 @@ public class PosterCharacter {
 	}
 
 	private int[] getLBPos(int W, int H, int w, int hu, int hd, int m, int nu, int nd) {
-		return new int[] { W / 4 - w / 2, (3 * H) / 4, W / 4 - m / 2, (3* H) / 4 + hd + nu + nd };
+		return new int[] { W / 4 - w / 2, (3 * H) / 4, W / 4 - m / 2, (3 * H) / 4 + hd + nu + nd };
 	}
 
 	private int[] getRTPos(int W, int H, int w, int hu, int hd, int m, int nu, int nd) {

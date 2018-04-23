@@ -60,8 +60,15 @@ public class ViewFactory {
 	public static ImageView createImageView(String path, PosterProduction production, Object handle)
 			throws MalformedURLException {
 		ImageView imageView = new ImageView(new Image((new File(path)).toURI().toURL().toString(), true));
-		imageView.setFitWidth(SizeManager.posterSize.getWidth());
-		imageView.setFitHeight((production.getHeight() * SizeManager.posterSize.getWidth()) / production.getWidth());
+		if ((SizeManager.posterSize.getWidth() / SizeManager.posterSize.getHeight()) < (production.getWidth()
+				/ production.getHeight())) {
+			imageView.setFitWidth(SizeManager.posterSize.getWidth());
+			imageView.setFitHeight((production.getHeight() * SizeManager.posterSize.getWidth()) / production.getWidth());
+		}else {
+			imageView.setFitHeight(SizeManager.posterSize.getHeight());
+			imageView.setFitWidth((production.getWidth() * SizeManager.posterSize.getHeight()) / production.getHeight());
+		}
+		
 		return imageView;
 	}
 
@@ -83,7 +90,7 @@ public class ViewFactory {
 		return label;
 	}
 
-	public static TextField createTextField(Font font, ViewCoordinate coordinate,TextFieldEventHandler handler) {
+	public static TextField createTextField(Font font, ViewCoordinate coordinate, TextFieldEventHandler handler) {
 		TextField textField = new TextField();
 		textField.setFont(font);
 		textField.setLayoutX(coordinate.getX());
@@ -119,9 +126,8 @@ public class ViewFactory {
 		int width = (production.getWidth() * height) / production.getHeight();
 
 		for (int i = 0; i < framesNum[0]; i++) {
+			// TODO: 内存占用过高，需要优化
 			Image image;
-			// image = new Image(
-			// "../frames/" + Configuration.getKeyFramePrefixName() + (i + 1) + ".jpeg");
 			File file = new File(
 					Configuration.getKeyFramePath() + Configuration.getKeyFramePrefixName() + (i + 1) + ".jpeg");
 			image = new Image(file.toURI().toURL().toString(), true);

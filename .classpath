@@ -2,9 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9">
 		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="VideoPosterMaker/lib"/>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="main/Main.java|view/VPMViewFactory.java|view/MainAppView.java|view/MainFrame.java|view/MainViewConf.java|filter/BlurEffect.java|filter/FastBlurUtil.java|filter/Filter.java|filter/FilterExec.java|filter/FilterExecutor.java|filter/WatercolourFilter.java|view/DescriptionSetter.java" kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/opencv-341.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

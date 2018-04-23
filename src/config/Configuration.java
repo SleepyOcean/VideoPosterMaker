@@ -5,7 +5,7 @@ package config;
  * @author: sleepyocean
  * @date: created in 2018年3月16日 下午1:15:28
  * @version: 1.0
- * @description: TODO (write your description)
+ * @description: 全局配置类
  */
 
 public class Configuration {
